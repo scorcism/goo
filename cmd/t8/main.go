@@ -36,13 +36,19 @@ func dbCall(i int) {
 	var delay float32 = 2000
 	time.Sleep(time.Duration(delay) * time.Microsecond)
 	fmt.Println("The result from the database is: ", dbData[i])
-	mutex.Lock()
-	results = append(results, dbData[i]) // Lock the access as this will be an shared resourse, critical section
-	mutex.Unlock()
+	save(dbData[i])
+	log()
 	wg.Done() // Done to decrement the incremented counter
 }
 
-func save(result string){
-	
+func save(result string) {
+	mutex.Lock()
+	results = append(results, result)
+	mutex.Unlock()
 }
 
+func log() {
+	rwMutex.RLock()
+	fmt.Printf("\nValue of results: %v", results)
+	rwMutex.RUnlock()
+}
