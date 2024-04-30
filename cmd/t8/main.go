@@ -20,7 +20,7 @@ func main() {
 	// 	dbCall(i)
 	// }
 	for i := 0; i < len(dbData); i++ {
-		// adding goroutines here by adding key `go`; But the program wont print anything has this will be an backend task
+		// adding goroutines here by adding key `go`; But the program wont print anything has this will be an backend/async task
 		// go dbCall(i)
 		// To overcome the abouve one we can use wait group; Its like a counter
 		wg.Add(1) // Adding one to the counter
